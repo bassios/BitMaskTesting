@@ -1,0 +1,14 @@
+﻿@model BitMaskTesting.ViewModels.TestingViewModel
+@{
+    ViewBag.Title = "Enum Testing";
+}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <select asp-items="Html.GetEnumSelectList<FormMask>()"></select>
+            </div>
+        </div>
+    </div>
+</div>
