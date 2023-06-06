@@ -5,6 +5,8 @@ using BitMaskTesting.Repositories.Interfaces;
 using BitMaskTesting.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,6 +33,15 @@ namespace BitMaskTesting.Services
                 .ToListAsync();
 
             return await GetDocTypesByCategorySelectListAsync(types);
+        }
+
+        public async Task<List<SelectGroup>> GetDocumentTypesForSelectedFormDBAsync(int id)
+        {
+            var bitArray = new BitArray(new int[] { id });
+
+            var test = (await _documentRepository.GetAllDocumentTypesAsync()).Select(s => s.FormMask).ToList();
+
+            throw new NotImplementedException();
         }
 
         public async Task<List<SelectListItem>> GetFormTypesSelectListAsync()

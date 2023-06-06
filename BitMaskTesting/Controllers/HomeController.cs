@@ -51,11 +51,18 @@ namespace BitMaskTesting.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<IActionResult> GetDocTypes(int id)
+        public async Task<IActionResult> GetDocTypesEnumAsync(int id)
         {
             if (id <= 0) return BadRequest();
 
             return Json(await _documentService.GetDocumentTypesForSelectedFormEnumAsync(id));
+        }
+
+        public async Task<IActionResult> GetDocTypesDBAsync(int id)
+        {
+            if (id <= 0) return BadRequest();
+
+            return Json(await _documentService.GetDocumentTypesForSelectedFormDBAsync(id));
         }
     }
 }
