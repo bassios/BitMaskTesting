@@ -1,0 +1,23 @@
+﻿@model BitMaskTesting.ViewModels.TestingViewModel
+@{
+    ViewBag.Title = "DB Test";
+}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <label class="col-form-label">Form Type</label>
+                <select id="FormType" class="form-control" asp-items="Model.FormTypes"></select>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <label class="col-form-label">Document Type</label>
+                <select id="DocumentType" class="form-control"></select>
+            </div>
+        </div>
+    </div>
+</div>

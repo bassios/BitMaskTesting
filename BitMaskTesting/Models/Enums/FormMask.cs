@@ -7,6 +7,7 @@ namespace BitMaskTesting.Models.Enums
     {
         None = 0,
         Form1 = 1,
-        Form2 = 2
+        Form2 = 2,
+        Form3 = 4
     }
 }

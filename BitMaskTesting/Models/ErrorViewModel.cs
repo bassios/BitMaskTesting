@@ -1,5 +1,3 @@
-using System;
-
 namespace BitMaskTesting.Models
 {
     public class ErrorViewModel

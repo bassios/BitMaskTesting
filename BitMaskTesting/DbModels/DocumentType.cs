@@ -7,6 +7,7 @@
         public int DocumentCategoryId { get; set; }
 
         public byte[] FormMask { get; set; }
+        public int FormMaskInt { get; set; }
 
         public DocumentCategory DocumentCategory { get; set; }
     }

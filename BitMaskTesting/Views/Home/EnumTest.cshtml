@@ -1,5 +1,4 @@
-﻿@model BitMaskTesting.ViewModels.TestingViewModel
-@{
+﻿@{
     ViewBag.Title = "Enum Testing";
 }
 
@@ -7,8 +6,51 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card-body">
-                <select asp-items="Html.GetEnumSelectList<FormMask>()"></select>
+                <label class="col-form-label">Form Type</label>
+                <select id="FormType" class="form-control" asp-items="Html.GetEnumSelectList<FormType>()"></select>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <label class="col-form-label">Document Type</label>
+                <select id="DocumentType" class="form-control"></select>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#FormType').on("change", function () {
+                GetDocTypes();
+            });
+        });
+
+        function GetDocTypes() {
+            var val = $('#FormType').val();
+            if (val == "") {
+                return false;
+            }
+
+            $.ajax({
+                url: "@Url.Action("GetDocTypes")",
+                data: { id: val },
+                success: function (data) {
+                    var items = '<option value="">Select...</option>';
+                    $.each(data, function (i, group) {
+                        items += `<optgroup label="${group.name}">`;
+                        $.each(group.items, function (j, item) {
+                            items += `<option value="${item.value}">${item.text}</option>`;
+                        });
+                        items += "</optgroup>";
+                    });
+
+                    $('#DocumentType').html(items);
+                }
+            });
+        }
+    </script>
+}
