@@ -38,6 +38,9 @@ namespace BitMaskTesting.Services
         public async Task<List<SelectGroup>> GetDocumentTypesForSelectedFormDBAsync(int id)
         {
             var bitArray = new BitArray(new int[] { id });
+            bool[] bits = new bool[bitArray.Length];
+            bitArray.CopyTo(bits, 0);
+            Array.Reverse(bits);
 
             var test = (await _documentRepository.GetAllDocumentTypesAsync()).Select(s => s.FormMask).ToList();
 
