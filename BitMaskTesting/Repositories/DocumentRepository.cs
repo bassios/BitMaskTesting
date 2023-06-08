@@ -39,7 +39,8 @@ namespace BitMaskTesting.Repositories
 
         public IQueryable<DocumentType> GetAllDocumentTypes()
         {
-            return _dbContext.DocumentTypes;
+            return _dbContext.DocumentTypes
+                .Include(i => i.DocumentCategory);
         }
     }
 }

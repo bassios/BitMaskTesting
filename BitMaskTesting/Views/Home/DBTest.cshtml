@@ -25,31 +25,26 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#FormType').on("change", function () {
-                GetDocTypes();
-            });
+            SetupSelect2();
         });
 
-        function GetDocTypes() {
-            var val = $('#FormType').val();
-            if (val == "") {
-                return false;
-            }
+        function SetupSelect2() {
+            $('#FormType').select2({
+                placeholder: "Select..."
+            });
 
-            $.ajax({
-                url: "@Url.Action("GetDocTypesDB")",
-                data: { id: val },
-                success: function (data) {
-                    var items = '<option value="">Select...</option>';
-                    $.each(data, function (i, group) {
-                        items += `<optgroup label="${group.name}">`;
-                        $.each(group.items, function (j, item) {
-                            items += `<option value="${item.value}">${item.text}</option>`;
-                        });
-                        items += "</optgroup>";
-                    });
-
-                    $('#DocumentType').html(items);
+            $('#DocumentType').select2({
+                placeholder: "Select...",
+                ajax: {
+                    url: "@Url.Action("GetDocTypesSelect2DB")",
+                    dataType: "json",
+                    data: function (params) {
+                        var query = {
+                            search: params.term,
+                            id: $('#FormType').val()
+                        }
+                        return query;
+                    }
                 }
             });
         }
